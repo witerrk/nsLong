@@ -5,3 +5,6 @@ Do you know the link shorteners which use a server? What if that instead made li
 I don't know why you would, but you're welcome!
 # If you didn't
 then why are you here?
+
+# ARE YA INTRESTED????
+If yes, GO TO https://witerrk.github.io/nsLong/
