@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nsLong</title>
+</head>
+<body>
+    <input type="text" id="shortInput" placeholder="Enter link to Elongate">
+    <button onclick="LongenLink()">Elongate</button>
+    <h1>Link: <span id="shortL"></span></h1>
+    <button onclick="copyLink()" id="cpy">Copy</button>
+    <script>
+        function LongenLink() { // the hell does Longen even mean
+            const input = document.getElementById('shortInput').value;
+            const unenc = input
+            const llist = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "/", "\\", " ", ".", ":"];
+
+            let enc = unenc[0];
+
+            for (let i = 0; i < unenc.length; i++) {
+                if (i !== 0) {
+                    let letChar = unenc[i];
+                    let lastLet = unenc[i - 1];
+
+                    let letNum = (llist.indexOf(letChar) + llist.indexOf(lastLet)) % llist.length;
+                    
+                    enc += llist[letNum];
+                }
+            }
+
+            console.log(enc);
+            document.getElementById('shortL').textContent = window.location.href + "?Url=" + btoa(unescape(encodeURIComponent(enc)));
+        }
+
+        function back() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encodedUrl = urlParams.get('Url');
+            if (encodedUrl) {
+                const unenc = decodeURIComponent(escape(atob(encodedUrl))); 
+                
+                const llist = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "/", "\\", " ", ".", ":"];
+
+                let enc = unenc[0];
+
+                for (let i = 1; i < unenc.length; i++) {
+                    let letChar = unenc[i];
+                    let lastLet = enc[i - 1];
+
+                    let letNum = (llist.indexOf(letChar) - llist.indexOf(lastLet) + llist.length) % llist.length;
+                    
+                    enc += llist[letNum];
+                }
+                window.location.href = enc;
+            }
+        }
+        function copyLink() {
+            const link = document.getElementById('shortL').textContent;
+            navigator.clipboard.writeText(link)
+            document.getElementById('cpy').textContent = "Copied!";
+            document.getElementById('cpy').disabled = true;
+            document.getElementById('cpy').style.backgroundColor = "green";
+            setTimeout(() => {
+                document.getElementById('cpy').textContent = "Copy";
+                document.getElementById('cpy').disabled = false;
+                document.getElementById('cpy').style.backgroundColor = "";
+            }, 1000);
+            
+        }
+
+        back();
+    </script>
+</body>
+</html>
