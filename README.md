@@ -7,4 +7,5 @@ I don't know why you would, but you're welcome!
 then why are you here?
 
 # ARE YA INTRESTED????
-If yes, GO TO https://witerrk.github.io/nsLong/
+## If yes, GO TO https://witerrk.github.io/nsLong/
+###### do not click this link: https://witerrk.github.io/nsLong/?Url=aDEvOThvOTVvPT1ydC85XFx2Zis/cTFlanZ3LzY1X3Bwd2VydGo9aC15di53dy85dGdodnpkYWZpcm1yd2VydGo/aHprbTI2endwaA==
