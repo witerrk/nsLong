@@ -7,13 +7,14 @@
 </head>
 <body>
     <input type="text" id="shortInput" placeholder="Enter link to Elongate">
+    <input type="text" id="code" placeholder="Enter code to encrypt (unrequired)">
     <button onclick="LongenLink()">Elongate</button>
     <h1>Link: <span id="shortL"></span></h1>
     <button onclick="copyLink()" id="cpy">Copy</button>
     <script>
         function LongenLink() { // the hell does Longen even mean
             const input = document.getElementById('shortInput').value;
-            const unenc = input
+            const unenc = document.getElementById('code').value + input
             const llist = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "/", "\\", " ", ".", ":", "?", "=", "+", "(", ")"];
 
             let enc = unenc[0];
@@ -30,6 +31,7 @@
             }
 
             console.log(enc);
+            enc = enc.slice(document.getElementById('code').value.length)
             document.getElementById('shortL').textContent = window.location.href + "?Url=" + btoa(unescape(encodeURIComponent(enc)));
         }
 
@@ -37,10 +39,28 @@
             const urlParams = new URLSearchParams(window.location.search);
             const encodedUrl = urlParams.get('Url');
             if (encodedUrl) {
-                const unenc = decodeURIComponent(escape(atob(encodedUrl))); 
-                
-                const llist = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "/", "\\", " ", ".", ":", "?", "=", "+", "(", ")"];
+                let code = prompt("Enter password:")
 
+                const input2 = code;
+                const unenc2 = input2;
+                const llist2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "/", "\\", " ", ".", ":", "?", "=", "+", "(", ")"];
+                const llist = llist2
+                
+                let enc2 = unenc2[0];
+                
+                for (let i2 = 0; i2 < unenc2.length; i2++) {
+                    if (i2 !== 0) {
+                        let letChar2 = unenc2[i2];
+                        let lastLet2 = unenc2[i2 - 1];
+                
+                        let letNum2 = (llist2.indexOf(letChar2) + llist2.indexOf(lastLet2)) % llist2.length;
+                        
+                        enc2 += llist2[letNum2];
+                    }
+                }
+                
+                const unenc = enc2 + decodeURIComponent(escape(atob(encodedUrl))); 
+                
                 let enc = unenc[0];
 
                 for (let i = 1; i < unenc.length; i++) {
@@ -51,7 +71,8 @@
                     
                     enc += llist[letNum];
                 }
-                window.location.href = enc;
+                
+                window.location.href = enc.slice(code.length);
             }
         }
         function copyLink() {
