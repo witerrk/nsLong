@@ -1,95 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nsLong</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nsLong</title>
 </head>
 <body>
-    <input type="text" id="shortInput" placeholder="Enter link to Elongate">
-    <input type="text" id="code" placeholder="Enter code to encrypt (unrequired)">
-    <button onclick="LongenLink()">Elongate</button>
-    <h1>Link: <span id="shortL"></span></h1>
-    <button onclick="copyLink()" id="cpy">Copy</button>
-    <script>
-        function LongenLink() { // the hell does Longen even mean
-            const input = document.getElementById('shortInput').value;
-            const unenc = document.getElementById('code').value + input
-            const llist = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "/", "\\", " ", ".", ":", "?", "=", "+", "(", ")"];
+    <input type="text" id="shortInput" placeholder="Enter link to Elongate">
+    <input type="text" id="code" placeholder="Enter code to encrypt (unrequired)">
+    <button onclick="LongenLink()">Elongate</button>
+    <h1>Link: <span id="shortL"></span></h1>
+    <button onclick="copyLink()" id="cpy">Copy</button>
+    <script>
+        function LongenLink() { // the hell does Longen even mean
+            const input = document.getElementById('shortInput').value;
+            const unenc = document.getElementById('code').value + input
+            const llist = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "/", "\\", " ", ".", ":", "?", "=", "+", "(", ")"];
 
-            let enc = unenc[0];
+            let enc = unenc[0];
 
-            for (let i = 0; i < unenc.length; i++) {
-                if (i !== 0) {
-                    let letChar = unenc[i];
-                    let lastLet = unenc[i - 1];
+            for (let i = 0; i < unenc.length; i++) {
+                if (i !== 0) {
+                    let letChar = unenc[i];
+                    let lastLet = unenc[i - 1];
 
-                    let letNum = (llist.indexOf(letChar) + llist.indexOf(lastLet)) % llist.length;
-                    
-                    enc += llist[letNum];
-                }
-            }
+                    let letNum = (llist.indexOf(letChar) + llist.indexOf(lastLet)) % llist.length;
+                    
+                    enc += llist[letNum];
+                }
+            }
 
-            console.log(enc);
-            enc = enc.slice(document.getElementById('code').value.length)
-            document.getElementById('shortL').textContent = window.location.href + "?Url=" + btoa(unescape(encodeURIComponent(enc)));
-        }
+            console.log(enc);
+            enc = enc.slice(document.getElementById('code').value.length)
+            document.getElementById('shortL').textContent = window.location.href + "?Url=" + btoa(unescape(encodeURIComponent(enc)));
+        }
 
-        function back() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const encodedUrl = urlParams.get('Url');
-            if (encodedUrl) {
-                let code = prompt("Enter password:")
+        function back() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encodedUrl = urlParams.get('Url');
+            if (encodedUrl) {
+                document.body.innerHTML = ''; // czyszczenie ekranu (bialy ekran)
+                let code = prompt("Enter password:")
 
-                const input2 = code;
-                const unenc2 = input2;
-                const llist2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "/", "\\", " ", ".", ":", "?", "=", "+", "(", ")"];
-                const llist = llist2
-                
-                let enc2 = unenc2[0];
-                
-                for (let i2 = 0; i2 < unenc2.length; i2++) {
-                    if (i2 !== 0) {
-                        let letChar2 = unenc2[i2];
-                        let lastLet2 = unenc2[i2 - 1];
-                
-                        let letNum2 = (llist2.indexOf(letChar2) + llist2.indexOf(lastLet2)) % llist2.length;
-                        
-                        enc2 += llist2[letNum2];
-                    }
-                }
-                
-                const unenc = enc2 + decodeURIComponent(escape(atob(encodedUrl))); 
-                
-                let enc = unenc[0];
+                const input2 = code;
+                const unenc2 = input2;
+                const llist2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "/", "\\", " ", ".", ":", "?", "=", "+", "(", ")"];
+                const llist = llist2
+                
+                let enc2 = unenc2[0];
+                
+                for (let i2 = 0; i2 < unenc2.length; i2++) {
+                    if (i2 !== 0) {
+                        let letChar2 = unenc2[i2];
+                        let lastLet2 = unenc2[i2 - 1];
+                
+                        let letNum2 = (llist2.indexOf(letChar2) + llist2.indexOf(lastLet2)) % llist2.length;
+                        
+                        enc2 += llist2[letNum2];
+                    }
+                }
+                
+                const unenc = enc2 + decodeURIComponent(escape(atob(encodedUrl))); 
+                
+                let enc = unenc[0];
 
-                for (let i = 1; i < unenc.length; i++) {
-                    let letChar = unenc[i];
-                    let lastLet = enc[i - 1];
+                for (let i = 1; i < unenc.length; i++) {
+                    let letChar = unenc[i];
+                    let lastLet = enc[i - 1];
 
-                    let letNum = (llist.indexOf(letChar) - llist.indexOf(lastLet) + llist.length) % llist.length;
-                    
-                    enc += llist[letNum];
-                }
-                
-                window.location.href = enc.slice(code.length);
-            }
-        }
-        function copyLink() {
-            const link = document.getElementById('shortL').textContent;
-            navigator.clipboard.writeText(link)
-            document.getElementById('cpy').textContent = "Copied!";
-            document.getElementById('cpy').disabled = true;
-            document.getElementById('cpy').style.backgroundColor = "green";
-            setTimeout(() => {
-                document.getElementById('cpy').textContent = "Copy";
-                document.getElementById('cpy').disabled = false;
-                document.getElementById('cpy').style.backgroundColor = "";
-            }, 1000);
-            
-        }
+                    let letNum = (llist.indexOf(letChar) - llist.indexOf(lastLet) + llist.length) % llist.length;
+                    
+                    enc += llist[letNum];
+                }
+                
+                window.onclick = function() {
+                    window.location.href = enc.slice(code.length);
+                };
+            }
+        }
+        function copyLink() {
+            const link = document.getElementById('shortL').textContent;
+            navigator.clipboard.writeText(link)
+            document.getElementById('cpy').textContent = "Copied!";
+            document.getElementById('cpy').disabled = true;
+            document.getElementById('cpy').style.backgroundColor = "green";
+            setTimeout(() => {
+                document.getElementById('cpy').textContent = "Copy";
+                document.getElementById('cpy').disabled = false;
+                document.getElementById('cpy').style.backgroundColor = "";
+            }, 1000);
+            
+        }
 
-        back();
-    </script>
+        back();
+    </script>
 </body>
 </html>
