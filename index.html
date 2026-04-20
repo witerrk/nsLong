@@ -14,10 +14,11 @@
     <script>
         function LongenLink() { // the hell does Longen even mean
             const input = document.getElementById('shortInput').value;
-            const unenc = document.getElementById('code').value + input
+            const codeVal = document.getElementById('code').value || "";
+            const unenc = codeVal + input
             const llist = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "/", "\\", " ", ".", ":", "?", "=", "+", "(", ")"];
 
-            let enc = unenc[0];
+            let enc = unenc.length > 0 ? unenc[0] : "";
 
             for (let i = 0; i < unenc.length; i++) {
                 if (i !== 0) {
@@ -31,23 +32,23 @@
             }
 
             console.log(enc);
-            enc = enc.slice(document.getElementById('code').value.length)
-            document.getElementById('shortL').textContent = window.location.href + "?Url=" + btoa(unescape(encodeURIComponent(enc)));
+            enc = enc.slice(codeVal.length)
+            document.getElementById('shortL').textContent = window.location.href.split('?')[0] + "?Url=" + btoa(unescape(encodeURIComponent(enc)));
         }
 
         function back() {
             const urlParams = new URLSearchParams(window.location.search);
             const encodedUrl = urlParams.get('Url');
             if (encodedUrl) {
-                document.body.innerHTML = ''; // czyszczenie ekranu (bialy ekran)
-                let code = prompt("Enter password:")
+                document.body.innerHTML = ''; 
+                let code = prompt("Enter password:") || "";
 
                 const input2 = code;
                 const unenc2 = input2;
                 const llist2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_", "/", "\\", " ", ".", ":", "?", "=", "+", "(", ")"];
                 const llist = llist2
                 
-                let enc2 = unenc2[0];
+                let enc2 = unenc2.length > 0 ? unenc2[0] : "";
                 
                 for (let i2 = 0; i2 < unenc2.length; i2++) {
                     if (i2 !== 0) {
@@ -62,7 +63,7 @@
                 
                 const unenc = enc2 + decodeURIComponent(escape(atob(encodedUrl))); 
                 
-                let enc = unenc[0];
+                let enc = unenc.length > 0 ? unenc[0] : "";
 
                 for (let i = 1; i < unenc.length; i++) {
                     let letChar = unenc[i];
